@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@material-ui/core": "^3.0.2",
     "@pusher/chatkit": "^0.7.17",
     "cors": "^2.8.4",
     "express": "^4.16.3",

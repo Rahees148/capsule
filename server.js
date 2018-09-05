@@ -33,21 +33,38 @@ app.post('/users', (req, res) => {
 })
 //create new Room
 app.post('/createTeam', (req, res) => {
-  const { username } = req.body
+  const data = req.body
+  console.log(data);
+  
   chatkit.createRoom({
-    creatorId: username,
-    name: 'my room',
+    creatorId: data.username,
+    name: data.teamname,
   })
-    .then(() => {
-      console.log('Room created successfully');
-    }).catch((err) => {
-      console.log(err);
-    });
+  .then(() => res.send('Room Created Successfully'))
+  .catch((err) => {
+    console.log(err);
+  });
+  
+})
+
+//get User Rooms
+app.get('/getTeam', (req, res) => {
+  chatkit.getUserRooms({
+    userId: 'rayees',
+  })
+  .then((responce) => {
+    const  data  = responce;
+    res.send({'data':'test', 'responce': data});
+    console.log(data);
+  }).catch((err) => {
+    console.log(err);
+  });
 })
 
 app.post('/authenticate', (req, res) => {
   const authData = chatkit.authenticate({ userId: req.query.user_id })
-  res.status(authData.status).send(authData.body)
+  res.status(authData.status).send(authData.body);
+  res.end();
 })
 
 const PORT = 3001

@@ -3,6 +3,8 @@ import Chatkit from '@pusher/chatkit'
 import MessageList from './components/MessageList'
 import SendMessageForm from './components/SendMessageForm'
 import TypingIndicator from './components/TypingIndicator'
+import CreateTeam from './components/CreateTeam'
+import TeamList from './components/TeamList'
 
 
 class ChatScreen extends Component {
@@ -68,15 +70,30 @@ class ChatScreen extends Component {
                 })
             })
             .then(currentRoom => {
-                this.setState({ currentRoom })
+                this.setState({ currentRoom });
             })
             .catch(error => console.error('error', error))
     }
+
+    onTeamCreat(username) {
+        fetch('http://localhost:3001/createTeam', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify( username ),
+        })
+        .then(response => {
+            console.log('done.');
+          })
+        .catch(error => console.error('error', error))
+      }
+
     render() {
 
         const styles = {
             container: {
-                height: '100vh',
+                height: '95vh',
                 display: 'flex',
                 flexDirection: 'column',
             },
@@ -88,7 +105,7 @@ class ChatScreen extends Component {
                 width: '300px',
                 flex: 'none',
                 padding: 20,
-                backgroundColor: '#2c303b',
+                backgroundColor: '#d4d4d4',
                 color: 'white',
             },
             chatListContainer: {
@@ -103,7 +120,12 @@ class ChatScreen extends Component {
             <div style={styles.container}>
                 <div style={styles.chatContainer}>
                     <aside style={styles.whosOnlineListContainer}>
-                        <h2>Who's online PLACEHOLDER</h2>
+                        {this.state && this.state.currentUser.id &&
+                            <div>
+                                <CreateTeam onSubmit={this.onTeamCreat} userId={this.state.currentUser.id}></CreateTeam>
+                                <TeamList></TeamList>
+                            </div>
+                        }
                     </aside>
                     <section style={styles.chatListContainer}>
                         <MessageList

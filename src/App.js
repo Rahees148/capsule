@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import UsernameForm from './components/UsernameForm'
 import ChatScreen from './ChatsScreen'
+import Header from './components/Header'
 
 class App extends Component {
   constructor() {
@@ -29,11 +30,19 @@ class App extends Component {
           .catch(error => console.error('error', error))
       }
   render() {
+
     if (this.state.currentScreen === 'WhatIsYourUsernameScreen') {
-      return <UsernameForm onSubmit={this.onUsernameSubmitted} />
+      return (
+          <UsernameForm onSubmit={this.onUsernameSubmitted} />
+      )
     }
    if (this.state.currentScreen === 'ChatScreen') {
-     return <ChatScreen currentUsername={this.state.currentUsername} />
+     return  (
+      <div>
+        <Header />
+        <ChatScreen currentUsername={this.state.currentUsername} />
+      </div>
+     )
    }
   }
 }

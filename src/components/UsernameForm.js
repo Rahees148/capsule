@@ -1,4 +1,8 @@
 import React, { Component } from 'react'
+import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
+import Paper from '@material-ui/core/Paper';
+import Grid from '@material-ui/core/Grid';
 
 class UsernameForm extends Component {
 constructor(props) {
@@ -18,22 +22,48 @@ constructor(props) {
  onChange(e) {
     this.setState({ username: e.target.value })
   }
+  textWidth = {
+    width: '100%'
+  }
+  alignCenter = {
+    textAlign: 'center'
+  }
+  imgWidth = {
+    maxWidth: 250
+  }
+  container = {
+    padding: 20,
+    textAlign: 'center',
+    marginTop: 40
+  }
 
  render() {
   return (
-      <div>
-        <div>
-          <h2>What is your username?</h2>
-          <form onSubmit={this.onSubmit}>
-            <input
-              type="text"
-              placeholder="Your full name"
-              onChange={this.onChange}
-            />
-            <input type="submit" />
-          </form>
-        </div>
-      </div>
+    <Grid container direction="row"  justify="center" >
+      <Grid item xs={8} >
+        <Paper style={this.container} >
+        <img alt="Logo" src="/images/logo.png" style={this.imgWidth} />
+          <form >
+              {/* <input
+                type="text"
+                placeholder="Your full name"
+                
+              /> */}
+              <TextField
+                id="textarea"
+                label="Enter your Name"
+                placeholder="Placeholder"
+                style = {this.textWidth}
+                margin="normal"
+                onChange={this.onChange}
+              />
+              <Button onClick={this.onSubmit} variant="contained" color="primary" >
+                Submit
+              </Button>
+            </form>
+        </Paper>
+      </Grid>
+      </Grid>
     )
   }
 }
