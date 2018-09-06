@@ -2,16 +2,30 @@ import React, { Component } from 'react'
 
 class Header extends Component {
   styles = {
-    padding: 10,
-    borderBottom: '1px solid #ccc'
+    header: {
+      padding: 10,
+      borderBottom: '1px solid #ccc',
+      textAlign:'center'
+    },
+    imgWidth : {
+      maxWidth: 250,
+      float: 'left'
+    },
+    welcome:{
+      float:'right',
+      marginTop:8
+    }
   }
-  imgWidth = {
-    maxWidth: 250
+  
+  logoutHandler() {
+    localStorage.removeItem('username');
   }
+  
  render() {
   return (
-      <header style={this.styles}>
-         <img alt="Logo" src="/images/logo.png" style={this.imgWidth} />
+      <header style={this.styles.header}>
+         <img alt="Logo" src="/images/logo.png" style={this.styles.imgWidth} />
+         <span style={this.styles.welcome}>Hi <b>{this.props.userName}</b> your in <b>{this.props.teamName}</b> Team | <a href='' onClick={this.logoutHandler.bind(this)}>Logout</a></span>
       </header>
     )
   }

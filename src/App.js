@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import UsernameForm from './components/UsernameForm'
 import ChatScreen from './ChatsScreen'
-import Header from './components/Header'
 
 class App extends Component {
   constructor() {
@@ -26,23 +25,17 @@ class App extends Component {
               currentUsername: username,
               currentScreen: 'ChatScreen'
             })
+            localStorage.setItem('username', this.state.currentUsername);
           })
           .catch(error => console.error('error', error))
       }
   render() {
-
-    if (this.state.currentScreen === 'WhatIsYourUsernameScreen') {
-      return (
-          <UsernameForm onSubmit={this.onUsernameSubmitted} />
-      )
+    const userLogin = localStorage.getItem('username');
+    if (!userLogin) {
+      return <UsernameForm onSubmit={this.onUsernameSubmitted} />
     }
-   if (this.state.currentScreen === 'ChatScreen') {
-     return  (
-      <div>
-        <Header />
-        <ChatScreen currentUsername={this.state.currentUsername} />
-      </div>
-     )
+   if (userLogin) {
+     return <ChatScreen currentUsername={userLogin} />
    }
   }
 }

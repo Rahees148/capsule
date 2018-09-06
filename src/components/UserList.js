@@ -1,11 +1,18 @@
 import React, { Component } from 'react'
 
-class MessagesList extends Component {
+class UserList extends Component {
+
+    handleClick(event) {
+        console.log(event.target);
+        console.log(event.target.value);
+        this.props.onFriendSelect(event.target.value);
+    }
     render() {
         const styles = {
             container: {
-                overflowY: 'scroll',
                 flex: 1,
+                height:'40%',
+                overflow: 'auto'
             },
             ul: {
                 listStyle: 'none',
@@ -13,11 +20,9 @@ class MessagesList extends Component {
             li: {
                 marginTop: 13,
                 marginBottom: 13,
-            },
-            senderUsername: {
-                fontWeight: 'bold',
-            },
-            message: { fontSize: 15 },
+                color: 'burlywood',
+                cursor: 'pointer'
+            }
         }
         return (
             <div
@@ -27,12 +32,9 @@ class MessagesList extends Component {
                 }}
             >
                 <ul style={styles.ul}>
-                    {this.props.messages.map((message, index) => (
-                        <li key={index} style={styles.li}>
-                            <div>
-                                <span style={styles.senderUsername}>{message.senderId}</span>{' '}
-                            </div>
-                            <p style={styles.message}>{message.text}</p>
+                    {this.props.users.map((user) => (
+                        <li key={user.id} value={user.id} style={styles.li} onClick={this.handleClick.bind(this)}>
+                            {user.name}
                         </li>
                     ))}
                 </ul>
@@ -41,4 +43,4 @@ class MessagesList extends Component {
     }
 }
 
-export default MessagesList
+export default UserList
