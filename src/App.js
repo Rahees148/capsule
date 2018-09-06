@@ -31,12 +31,11 @@ class App extends Component {
       }
   render() {
     const userLogin = localStorage.getItem('username');
-    if (!userLogin) {
-      return <UsernameForm onSubmit={this.onUsernameSubmitted} />
-    }
-   if (userLogin) {
-     return <ChatScreen currentUsername={userLogin} />
-   }
+    return (
+      <div>{
+        !userLogin ? <UsernameForm onSubmit={this.onUsernameSubmitted} /> : <ChatScreen currentUsername={userLogin} />
+      }</div>
+    )
   }
 }
 

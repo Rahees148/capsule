@@ -77,10 +77,10 @@ class ChatScreen extends Component {
                     roomId: this.state.currentRoomId
                 })
                     .then(() => {
-                    console.log('Added keith to room 123')
+                    console.log('Added to room')
                     })
                     .catch(err => {
-                    console.log(`Error adding keith to room 123: ${err}`)
+                    console.log(`Error adding to room: ${err}`)
                     })
                 this.setState({addUser: false});
             } else {
