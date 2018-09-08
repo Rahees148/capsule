@@ -13,7 +13,8 @@ const chatkit = new Chatkit.default({
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 app.use(cors())
-
+// make express look in the public directory for assets (css/js/img)
+app.use(express.static(__dirname + '/build'));
 //create new user
 app.post('/users', (req, res) => {
   const { username } = req.body
