@@ -18,7 +18,7 @@ class Header extends Component {
   }
   
   logoutHandler() {
-    localStorage.removeItem('username');
+    localStorage.removeItem('authentication');
   }
   
  render() {
