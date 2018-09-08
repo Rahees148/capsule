@@ -12,7 +12,7 @@ class TeamList extends Component {
         const styles = {
             container: {
                 flex: 1,
-                height:'40%',
+                maxHeight:'40%',
                 overflow: 'auto'
             },
             ul: {
