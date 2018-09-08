@@ -4,9 +4,11 @@
 
 To run the application do the following steps:
 ```
+git clone 'https://github.com/Rahees148/capsule.git'
 npm install
 npm run start
 ```
+DEMO : https://capsule-cicd.herokuapp.com/
 
 ## Scope of the Project
 
@@ -18,3 +20,4 @@ Following functionalities are implemented
 * User can see their friends list
 * User can see the members of the team which he is authorized
 * User can chat with team which he is authorzed
+* CICD 

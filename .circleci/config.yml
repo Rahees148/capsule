@@ -18,7 +18,13 @@ jobs:
 
     steps:
       - checkout
+      - restore_cache
+          key: node_modules-cache-{{ checksum package.json }}
       - run: npm install
+      - save_cache:
+            key: node_modules-cache-{{ checksum package.json }}
+            paths:
+              - node_modules
       - run: npm test
       - run: npm build
   deploy:
