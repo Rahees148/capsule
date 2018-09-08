@@ -29,7 +29,7 @@
     "concurrently": "^3.5.1"
   },
   "scripts": {
-    "start": "node server.js",
+    "start": "concurrently \"node ./server.js\" \"react-scripts start\"",
     "postinstall": "react-scripts build",
     "build": "react-scripts build",
     "test": "mocha src/**/*.test.js",
