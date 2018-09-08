@@ -21,3 +21,5 @@ Following functionalities are implemented
 * User can see the members of the team which he is authorized
 * User can chat with team which he is authorzed
 * CICD 
+
+<img src="./public/images/cicd.png" alt="cicd">
