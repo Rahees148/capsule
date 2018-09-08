@@ -29,7 +29,8 @@
     "concurrently": "^3.5.1"
   },
   "scripts": {
-    "start": "concurrently \"node ./server.js\" \"react-scripts start\"",
+    "serve": "concurrently \"node ./server.js\" \"react-scripts start\"",
+    "start": "node ./server.js",
     "build": "react-scripts build",
     "test": "mocha src/**/*.test.js",
     "eject": "react-scripts eject"
