@@ -25,7 +25,7 @@ class Header extends Component {
   return (
       <header style={this.styles.header}>
          <img alt="Logo" src="/images/logo.png" style={this.styles.imgWidth} />
-         <span style={this.styles.welcome}>Hi <b>{this.props.userName}</b> your in <b>{this.props.teamName}</b> Team | <a href='' onClick={this.logoutHandler.bind(this)}>Logout</a></span>
+         <span style={this.styles.welcome}>Hello <b>{this.props.userName}</b> your in <b>{this.props.teamName}</b> Team | <a href='' onClick={this.logoutHandler.bind(this)}>Logout</a></span>
       </header>
     )
   }

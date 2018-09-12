@@ -4,7 +4,6 @@ import { getUserName } from './services';
 
 function* getUserName_(action) {
     const username = yield call(getUserName, action.username);
-    console.log('saga', action);
     yield put({ type: 'SET_USERNAME', username });
 }
 
