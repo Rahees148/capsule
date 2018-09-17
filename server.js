@@ -54,7 +54,7 @@ app.post('/authenticate', (req, res) => {
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, err => {
   if (err) {
-    console.error(err)
+    console.error('error-rayees', err)
   } else {
     console.log(`Running on port ${PORT}`)
   }
