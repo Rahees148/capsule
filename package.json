@@ -31,7 +31,7 @@
     "enzyme-adapter-react-16": "^1.5.0"
   },
   "scripts": {
-    "start": "concurrently \"node ./server.js\" \"react-scripts start\"",
+    "start": "node ./server.js",
     "postinstall": "react-scripts build",
     "build": "react-scripts build",
     "test": "mocha src/**/*.test.js",
