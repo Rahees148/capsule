@@ -10,15 +10,18 @@ class Members extends Component {
             },
             ul: {
                 listStyle: 'none',
+                padding: 0,
+
             },
             li: {
                 marginTop: 13,
                 marginBottom: 13,
-                color: 'burlywood',
+                color: '#4d394b',
             }
         }
         return (
             <div style={styles.container}>
+                <h5>Members of Team</h5>
                 <ul style={styles.ul}>
                     {this.props.members.map((user, index) => (
                         <li key={index} value={user} style={styles.li}>

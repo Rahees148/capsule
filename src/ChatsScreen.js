@@ -7,7 +7,6 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 import Lock from '@material-ui/icons/Lock';
 import LockOpen from '@material-ui/icons/LockOpen';
-import PersonAdd from '@material-ui/icons/PersonAdd';
 import People from '@material-ui/icons/People';
 import Popover from '@material-ui/core/Popover';
 
@@ -61,7 +60,7 @@ class ChatScreen extends Component {
         this.setState({ teamname: e.target.value })
     }
     handleAddUserChange(e) {
-        this.setState({ addusername: e.target.value })
+        this.setState({ addusername: e.target.value });
     }
     handleAddUserClick (e) {
         this.setState({addUser: true});
@@ -76,9 +75,11 @@ class ChatScreen extends Component {
                     userId: this.state.addusername,
                     roomId: this.state.currentRoomId
                 })
-                    .then(() => {
-                    console.log('Added to room')
-                    })
+                .then(() => {
+                    console.log('Added to room');
+                    this.setState({ addusername: '' });
+                    this.getTeamMembers(this.state.currentRoomId);
+                })
                     .catch(err => {
                     console.log(`Error adding to room: ${err}`)
                     })
@@ -125,7 +126,7 @@ class ChatScreen extends Component {
             instanceLocator: 'v1:us1:a8fa5b17-5ffe-43b4-bd2c-468d2eaabcc8',
             userId: this.props.currentUsername,
             tokenProvider: new Chatkit.TokenProvider({
-                url: '/authenticate',
+                url: 'http://localhost:3001/authenticate',
             }),
         })
     }
@@ -145,7 +146,8 @@ class ChatScreen extends Component {
                         onNewMessage: message => {
                             this.setState({
                                 messages: [...this.state.messages, message],
-                            })
+                            });
+                            this.updateScroll()
                         },
                         onUserStartedTyping: user => {
                             this.setState({
@@ -196,7 +198,9 @@ class ChatScreen extends Component {
         const newRoom = this.state.currentUserTeams.filter(function (el) { return el.id === id; });
         this.setState({currentRoomId : id });
         this.setState({currentRoom : newRoom[0] });
-       // newRoom[0].userIds.length > 0 ? this.getTeamMembers(id) : '';
+        if(newRoom[0].userIds.length > 0 ){
+            this.getTeamMembers(id)
+        }
         this.chatManagerLoadRoomMessages(id);
     }
 
@@ -209,17 +213,23 @@ class ChatScreen extends Component {
     onFriendSelect(friendId) {
         console.log('ff',friendId);
     }
+
     handleClick = event => {
         this.setState({
           anchorEl: event.currentTarget,
         });
-      };
+    };
+
+    updateScroll(){
+        let element = document.getElementById("messageList");
+        element.scrollTop = element.scrollHeight;
+    }
     
-      handleClose = () => {
+    handleClose = () => {
         this.setState({
           anchorEl: null,
         });
-      };
+    };
 
     render() {
         const open = Boolean(this.state.anchorEl);
@@ -304,25 +314,23 @@ class ChatScreen extends Component {
                                 : ''}
                     </aside>
                     <section style={styles.chatListContainer}>
-                        {/* <h2 style={styles.chatListContainer.h2Title}>{this.state.currentRoom.name}</h2> */}
                         { this.state.currentUserTeams.length > 0 ?    
                             <div>
-                            <div style={styles.chatListContainer.addUser} onClick={this.handleAddUserClick}>
-                            {this.state.addUser ? 
-                                <FormControl>
-                                    <Input placeholder="Add user"   
+                            <div style={styles.chatListContainer.addUser} >
+                            <FormControl>
+                                    <Input placeholder="Add user to team"   
                                     value={this.state.addusername}
                                     onKeyDown={this.addUser}
                                     onChange={this.handleAddUserChange} />
-                                </FormControl> : <PersonAdd /> }
+                                </FormControl> 
                             </div>
                             <div style={styles.chatListContainer.listUser}>
+                           
                             <People
                             aria-owns={open ? 'simple-popper' : null}
                             aria-haspopup="true"
                             variant="contained"
-                            onClick={this.handleClick}>
-                                    </People>
+                            onClick={this.handleClick} /> 
                                     <Popover
                                         id="simple-popper"
                                         open={open}
@@ -337,7 +345,6 @@ class ChatScreen extends Component {
                                         horizontal: 'center',
                                         }}
                                     >
-                                    Members of Team <br />
                                     <Members members={this.state.teamMembers}/>
                                     </Popover>
                                 </div>

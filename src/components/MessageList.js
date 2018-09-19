@@ -20,7 +20,7 @@ class MessagesList extends Component {
             message: { fontSize: 15 },
         }
         return (
-            <div
+            <div id="messageList"
                 style={{
                     ...this.props.style,
                     ...styles.container,
